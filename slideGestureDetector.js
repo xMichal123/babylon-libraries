@@ -92,5 +92,5 @@ class SlideGestureDetector {
     }
 }
 
-const slideGestureDetector = new SlideGestureDetector();
-export default slideGestureDetector;
+window.slideGestureDetector = new SlideGestureDetector();
+//export default slideGestureDetector;
