@@ -93,3 +93,4 @@ class SlideGestureDetector {
 }
 
 const slideGestureDetector = new SlideGestureDetector();
+export default slideGestureDetector;
