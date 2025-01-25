@@ -2,6 +2,7 @@ class GameOverManager {
     constructor() {
         this.initialized = false;
         this.scoreBlocks = [];
+        this.currentScene = null;
     }
 
     init(model) {
@@ -104,6 +105,14 @@ class GameOverManager {
     }
 
     popup(model) {
+        if (this.currentScene != null && this.currentScene != scene) {
+            this.currentScene = scene;
+            this.background.dispose();
+            this.background = null;
+            this.scoreBlocks = [];
+            this.initialized = false;
+        }
+        
         if (this.background && this.background.isVisible) {
             return;
         }
