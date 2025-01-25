@@ -1,21 +1,26 @@
 class ScoreManager {
     constructor() {
-        this.scoreBlocks = [];
-        this._animTick = -1;
+        this.horizontalPanel = null;
     }
 
     init(model, updateFunction) {
+        this.scoreBlocks = [];
+        this._animTick = -1;
         this.model = [];
         this.lastValues = [];
         this.updateFunction = updateFunction;
 
-        var horizontalPanel = new BABYLON.GUI.StackPanel();
-        horizontalPanel.isVertical = false; // Set to false for horizontal stacking
-        horizontalPanel.top = "-40%";
-        horizontalPanel.left = "20px";
-        horizontalPanel.height = "20px";
-        horizontalPanel.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        advancedTexture.addControl(horizontalPanel);
+        if (this.horizontalPanel) {
+            this.horizontalPanel.dispose();
+        }
+
+        this.horizontalPanel = new BABYLON.GUI.StackPanel();
+        this.horizontalPanel.isVertical = false; // Set to false for horizontal stacking
+        this.horizontalPanel.top = "-40%";
+        this.horizontalPanel.left = "20px";
+        this.horizontalPanel.height = "20px";
+        this.horizontalPanel.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        advancedTexture.addControl(this.horizontalPanel);
 
         for (let row of model) {
             let rowText = new BABYLON.GUI.TextBlock();
@@ -24,7 +29,7 @@ class ScoreManager {
             rowText.color = "white";
             rowText.fontSize = 24;
             rowText.width = row.width ? row.width : "80px";
-            horizontalPanel.addControl(rowText);
+            this.horizontalPanel.addControl(rowText);
             this.scoreBlocks.push(rowText);
             this.lastValues.push(row.value);
             this.model.push(row);
