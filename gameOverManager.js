@@ -37,30 +37,48 @@ class GameOverManager {
         // Grid for fixed stats
         this.grid = new BABYLON.GUI.Grid();
         this.grid.width = "100%";
-        this.grid.height = "" + (model.length * 50) + "px";
+        this.grid.height = "" + ((model.length + 2) * 50) + "px";
         this.grid.addColumnDefinition(0.5); // 50% width for labels
         this.grid.addColumnDefinition(0.5); // 50% width for values
 
+        const rowHeight = 100 / (model.length + 2);
+
         for (let i = 0; i < model.length; i++) {
-            this.grid.addRowDefinition(100 / model.length);
+            this.grid.addRowDefinition(rowHeight);
             this.addLabel(model[i].name + ":", model[i].color, i, model[i].weight);
         }
 
-        this.panel.addControl(this.grid);
+        this.grid.addRowDefinition(rowHeight);
+        this.grid.addRowDefinition(rowHeight);
 
-        // Play again button
-        this.playAgainButton = BABYLON.GUI.Button.CreateSimpleButton("playAgain", "Play Again");
-        this.playAgainButton.width = "200px";
-        this.playAgainButton.height = "50px";
-        this.playAgainButton.color = "white";
-        this.playAgainButton.background = "green";
-        this.playAgainButton.paddingTop = "20px";
-        this.playAgainButton.onPointerClickObservable.add(() => {
+        this.addButtons(model.length + 1);
+
+        this.panel.addControl(this.grid);
+    }
+
+    addButtons(row) {
+        const but1 = this.addButton("stop-button.png");
+        const but2 = this.addButton("restart-button.png", () => {
             this.hide(); // Hide on play again
             gameManager.restart(); // Custom callback for resetting the game
         });
-        
-        this.panel.addControl(this.playAgainButton);
+
+        this.grid.addControl(but1, row, 0);
+        this.grid.addControl(but2, row, 1);
+    }
+
+    addButton(name, action = null) {
+        var button = BABYLON.GUI.Button.CreateImageOnlyButton(name, "https://raw.githubusercontent.com/xMichal123/babylon-libraries/main/resources/" + name);
+        button.width = 0.9;
+        button.color = "white";
+        button.thickness = 0;
+        button.cornerRadius = 20;
+
+        if (action) {
+            button.onPointerClickObservable.add(action);
+        }
+
+        return button;
     }
 
     // Add a fixed label to the grid
