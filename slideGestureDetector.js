@@ -63,6 +63,8 @@ class SlideGestureDetector {
 
     // Register a callback for slide up
     onSlideUp(callback) {
+        this.ensureScene();
+        
         if (typeof callback === "function") {
             this.attachEvents();
             this.slideUpCallbacks.push(callback);
@@ -73,6 +75,8 @@ class SlideGestureDetector {
 
     // Register a callback for slide down
     onSlideDown(callback) {
+        this.ensureScene();
+        
         if (typeof callback === "function") {
             this.attachEvents();
             this.slideDownCallbacks.push(callback);
@@ -83,14 +87,26 @@ class SlideGestureDetector {
 
     // Trigger slide up callbacks
     emitSlideUp() {
+        this.ensureScene();
+        
         this.slideUpCallbacks.forEach((callback) => callback());
     }
 
     // Trigger slide down callbacks
     emitSlideDown() {
+        this.ensureScene();
+        
         this.slideDownCallbacks.forEach((callback) => callback());
+    }
+
+    ensureScene() {
+        if (this.currentScene != scene) {
+            this.currentScene = scene;
+            this.slideUpCallbacks = [];
+            this.slideDownCallbacks = [];
+        }
     }
 }
 
 window.slideGestureDetector = new SlideGestureDetector();
-//export default slideGestureDetector;
+
