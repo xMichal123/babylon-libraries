@@ -10,6 +10,10 @@ class GameControlsManager {
         this.pauseButton = this.addButton("pause-button.png", () => {
             helpThis.background.isVisible = true;
             helpThis.introImage.isVisible = true;
+            
+            if (this.pauseCallback) {
+                this.pauseCallback();
+            }
         });
 
         this.pauseButton.top = "20px";
@@ -87,14 +91,20 @@ class GameControlsManager {
         const but1 = this.addButton("stop-button.png");
         const but2 = this.addButton("restart-button.png", () => {
             this.hide(); // Hide on play again
-            gameManager.restart(); // Custom callback for resetting the game
+            if (this.restartCallback) {
+                this.restartCallback();
+            }
         });
 
         this.grid.addControl(but1, row, 0);
         this.grid.addControl(but2, row, 1);
     }
 
-    init(imgUrl, callback) {
+    init(imgUrl, startCallback = () => { gameManager.start(true); }, restartCallback = () => { gameManager.restart(); }, pauseCallback = () => {}, resumeCallback = () => {}) {
+        this.restartCallback = restartCallback;
+        this.pauseCallback = pauseCallback;
+        this.resumeCallback = resumeCallback;
+        
         if (this.introImage) {
             advancedTexture.removeControl(this.introImage);
             this.introImage.dispose();
@@ -110,9 +120,13 @@ class GameControlsManager {
         this.introImage.onPointerClickObservable.add(() => {
             this.hide();
             this.pauseButton.isVisible = true;
-            
-            if (callback) {
-                callback();
+
+            if (this.background && this.background.isVisible) {
+                if (resumeCallback) {
+                    resumeCallback();
+                }
+            } else if (startCallback) {
+                startCallback();
             }
         });
 
