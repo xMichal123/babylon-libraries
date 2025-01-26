@@ -7,14 +7,7 @@ class GameControlsManager {
     initialize() {
         const helpThis = this;
 
-        this.pauseButton = this.addButton("pause-button.png", () => {
-            helpThis.background.isVisible = true;
-            helpThis.introImage.isVisible = true;
-            
-            if (this.pauseCallback) {
-                this.pauseCallback();
-            }
-        });
+        this.pauseButton = this.addButton("pause-button.png");
 
         this.pauseButton.top = "20px";
         this.pauseButton.left = "-20px";
@@ -56,9 +49,7 @@ class GameControlsManager {
         this.gameOverText.paddingBottom = "20px";
         this.panel.addControl(this.gameOverText);
 
-        this.resumeButton = this.addButton("resume-button.png", () => {
-            helpThis.hide();
-        });
+        this.resumeButton = this.addButton("resume-button.png");
 
         this.resumeButton.width = "400px";
         this.resumeButton.height = "100px";
@@ -88,13 +79,8 @@ class GameControlsManager {
     }
 
     addButtons(row) {
-        const but1 = this.addButton("stop-button.png");
-        const but2 = this.addButton("restart-button.png", () => {
-            this.hide(); // Hide on play again
-            if (this.restartCallback) {
-                this.restartCallback();
-            }
-        });
+        this.stopButton = this.addButton("stop-button.png");
+        this.restartButton = this.addButton("restart-button.png");
 
         this.grid.addControl(but1, row, 0);
         this.grid.addControl(but2, row, 1);
@@ -104,7 +90,32 @@ class GameControlsManager {
         this.restartCallback = restartCallback;
         this.pauseCallback = pauseCallback;
         this.resumeCallback = resumeCallback;
-        
+
+        this.pauseButton.onPointerClickObservable.clear();
+        this.pauseButton.onPointerClickObservable.add(() => {
+            this.background.isVisible = true;
+            this.introImage.isVisible = true;
+            
+            if (this.pauseCallback) {
+                this.pauseCallback();
+            }
+        });
+
+        this.restartButton.onPointerClickObservable.clear();
+        this.restartButton.onPointerClickObservable.add(() => {
+            this.hide(); // Hide on play again
+            if (this.restartCallback) {
+                this.restartCallback();
+            }
+        });
+
+        this.resumeButton.onPointerClickObservable.clear();
+        this.resumeButton.onPointerClickObservable.add(() => {
+            this.hide(); // Hide on play again
+            if (this.resumeCallback) {
+                this.resumeCallback();
+            }
+        });
         if (this.introImage) {
             advancedTexture.removeControl(this.introImage);
             this.introImage.dispose();
