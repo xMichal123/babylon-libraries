@@ -87,15 +87,31 @@ class GameControlsManager {
     }
 
     init(imgUrl, startCallback = () => { gameManager.start(true); }, restartCallback = () => { gameManager.restart(); }, pauseCallback = () => {}, resumeCallback = () => {}) {
-        this.restartCallback = restartCallback;
-        this.pauseCallback = pauseCallback;
-        this.resumeCallback = resumeCallback;
-
         if (this.introImage) {
             advancedTexture.removeControl(this.introImage);
             this.introImage.dispose();
         } else {
             this.initialize();
+        }
+
+        if (this.pauseCallback) {
+            window.removeEventListener('blur', this.pauseCallback);
+        }
+
+        if (this.resumeCallback) {
+            window.removeEventListener('focus', this.resumeCallback);
+        }
+        
+        this.restartCallback = restartCallback;
+        this.pauseCallback = pauseCallback;
+        this.resumeCallback = resumeCallback;
+
+        if (this.pauseCallback) {
+            window.addEventListener('blur', this.pauseCallback);
+        }
+
+        if (this.resumeCallback) {
+            window.addEventListener('focus', this.resumeCallback);
         }
 
         this.pauseButton.onPointerClickObservable.clear();
