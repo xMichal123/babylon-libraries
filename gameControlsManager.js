@@ -82,14 +82,21 @@ class GameControlsManager {
         this.stopButton = this.addButton("stop-button.png");
         this.restartButton = this.addButton("restart-button.png");
 
-        this.grid.addControl(but1, row, 0);
-        this.grid.addControl(but2, row, 1);
+        this.grid.addControl(this.stopButton, row, 0);
+        this.grid.addControl(this.restartButton, row, 1);
     }
 
     init(imgUrl, startCallback = () => { gameManager.start(true); }, restartCallback = () => { gameManager.restart(); }, pauseCallback = () => {}, resumeCallback = () => {}) {
         this.restartCallback = restartCallback;
         this.pauseCallback = pauseCallback;
         this.resumeCallback = resumeCallback;
+
+        if (this.introImage) {
+            advancedTexture.removeControl(this.introImage);
+            this.introImage.dispose();
+        } else {
+            this.initialize();
+        }
 
         this.pauseButton.onPointerClickObservable.clear();
         this.pauseButton.onPointerClickObservable.add(() => {
@@ -116,12 +123,6 @@ class GameControlsManager {
                 this.resumeCallback();
             }
         });
-        if (this.introImage) {
-            advancedTexture.removeControl(this.introImage);
-            this.introImage.dispose();
-        } else {
-            this.initialize();
-        }
         
         this.introImage = new BABYLON.GUI.Image("intro", imgUrl);
         this.introImage.width = "100%";
