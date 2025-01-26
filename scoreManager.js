@@ -16,10 +16,11 @@ class ScoreManager {
 
         this.horizontalPanel = new BABYLON.GUI.StackPanel();
         this.horizontalPanel.isVertical = false; // Set to false for horizontal stacking
-        this.horizontalPanel.top = "-40%";
+        this.horizontalPanel.top = "20px";
         this.horizontalPanel.left = "20px";
         this.horizontalPanel.height = "20px";
         this.horizontalPanel.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.horizontalPanel.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
         advancedTexture.addControl(this.horizontalPanel);
 
         for (let row of model) {
