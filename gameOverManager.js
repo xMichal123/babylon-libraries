@@ -70,8 +70,8 @@ class GameOverManager {
         });
         const but2 = this.addButton("restart-button.png", () => {
             this.hide(); // Hide on play again
-            if (callback) {
-                callback(); // Custom callback for resetting the game
+            if (this.callback) {
+                this.callback(); // Custom callback for resetting the game
             }
         });
 
