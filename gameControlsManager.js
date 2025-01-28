@@ -70,6 +70,13 @@ class GameControlsManager {
 
         this.addButtons(1);
 
+        this.stopButton.onPointerClickObservable.add(() => {
+            //this.hide(); // Hide on play again
+            if (moreGamesCallback) {
+                moreGamesCallback();
+            }
+        });
+
         this.panel.addControl(this.grid);
     }
 
