@@ -5,7 +5,11 @@ class GameOverManager {
         this.currentScene = null;
     }
 
-    init(model, callback = () => { gameManager.restart(); }) {
+    init(callback = () => { gameManager.restart(); }) {
+        this.callback = callback;
+    }
+    
+    initialize(model) {
         // Add a background rectangle
         this.background = new BABYLON.GUI.Rectangle();
         this.background.width = "500px";
@@ -52,16 +56,23 @@ class GameOverManager {
         this.grid.addRowDefinition(rowHeight);
         this.grid.addRowDefinition(rowHeight);
 
-        this.addButtons(model.length + 1, callback);
+        this.addButtons(model.length + 1);
 
         this.panel.addControl(this.grid);
     }
 
-    addButtons(row, callback) {
-        const but1 = this.addButton("stop-button.png");
+    addButtons(row) {
+        const but1 = this.addButton("stop-button.png", () => {
+            //this.hide(); // Hide on play again
+            if (moreGamesCallback) {
+                moreGamesCallback();
+            }
+        });
         const but2 = this.addButton("restart-button.png", () => {
             this.hide(); // Hide on play again
-            callback(); // Custom callback for resetting the game
+            if (callback) {
+                callback(); // Custom callback for resetting the game
+            }
         });
 
         this.grid.addControl(but1, row, 0);
@@ -118,7 +129,7 @@ class GameOverManager {
         }
         
         if (!this.initialized) {
-            this.init(model);
+            this.initialize(model);
             this.initialized = true;
         }
 
