@@ -116,8 +116,8 @@ class GameOverManager {
     }
 
     popup(model) {
-        if (this.currentScene != null && this.currentScene != scene) {
-            this.currentScene = scene;
+        if (this.currentScene != null && this.currentScene != window.gameScene) {
+            this.currentScene = window.gameScene;
             this.background.dispose();
             this.background = null;
             this.scoreBlocks = [];
