@@ -100,8 +100,8 @@ class SlideGestureDetector {
     }
 
     ensureScene() {
-        if (this.currentScene != scene) {
-            this.currentScene = scene;
+        if (this.currentScene != window.gameScene) {
+            this.currentScene = window.gameScene;
             this.slideUpCallbacks = [];
             this.slideDownCallbacks = [];
         }
