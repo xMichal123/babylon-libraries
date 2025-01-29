@@ -36,7 +36,7 @@ class ScoreManager {
             this.model.push(row);
         }
         
-        scene.onBeforeRenderObservable.add(() => {
+        window.gameScene.onBeforeRenderObservable.add(() => {
             for (let i = 0; i < this.model.length; i++) {
                 if (this.model[i].value != this.lastValues[i]) {
                     this.scoreBlocks[i].text = " " + this.model[i].initials + ":" + this.model[i].value + " ";
