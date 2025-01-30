@@ -63,7 +63,7 @@ class GameOverManager {
 
     addButtons(row) {
         const but1 = this.addButton("stop-button.png", () => {
-            //this.hide(); // Hide on play again
+            this.hide(); // Hide on play again
             if (moreGamesCallback) {
                 moreGamesCallback();
             }
