@@ -6,7 +6,7 @@ class GameControlsManager {
     }
 
     get paused() {
-        this._paused > 0;
+        return this._paused > 0;
     }
     
     initialize() {
