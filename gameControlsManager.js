@@ -2,8 +2,13 @@ class GameControlsManager {
     constructor() {
         this.introImage = null;
         this.pauseButton = null;
+        this._paused = 0;
     }
 
+    get paused() {
+        this._paused > 0;
+    }
+    
     initialize() {
         const helpThis = this;
 
@@ -110,8 +115,15 @@ class GameControlsManager {
         }
         
         this.restartCallback = restartCallback;
-        this.pauseCallback = pauseCallback;
-        this.resumeCallback = resumeCallback;
+        this.pauseCallback = () => {
+            this._paused++;
+            pauseCallback();
+        }
+        
+        this.resumeCallback = () => {
+            this._paused--;
+            resumeCallback();
+        }
 
         if (this.pauseCallback) {
             window.addEventListener('blur', this.pauseCallback);
