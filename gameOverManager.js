@@ -117,7 +117,6 @@ class GameOverManager {
 
     popup(model) {
         if (this.currentScene != null && this.currentScene != window.gameScene) {
-            this.currentScene = window.gameScene;
             this.background.dispose();
             this.background = null;
             this.scoreBlocks = [];
@@ -129,6 +128,7 @@ class GameOverManager {
         }
         
         if (!this.initialized) {
+            this.currentScene = window.gameScene;
             this.initialize(model);
             this.initialized = true;
         }
