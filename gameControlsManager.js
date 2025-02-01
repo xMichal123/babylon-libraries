@@ -99,6 +99,8 @@ class GameControlsManager {
     }
 
     init(imgUrl, startCallback = () => { gameManager.start(true); }, restartCallback = () => { gameManager.restart(); }, pauseCallback = () => {}, resumeCallback = () => {}) {
+        this._paused = 0;
+        
         if (this.introImage) {
             advancedTexture.removeControl(this.introImage);
             this.introImage.dispose();
@@ -114,7 +116,11 @@ class GameControlsManager {
             window.removeEventListener('focus', this.resumeCallback);
         }
         
-        this.restartCallback = restartCallback;
+        this.restartCallback = () => {
+            this._paused = 0;
+            restartCallback();
+        }
+        
         this.pauseCallback = () => {
             this._paused++;
             pauseCallback();
