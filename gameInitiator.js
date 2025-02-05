@@ -58,7 +58,7 @@ var startRenderLoop = function (engine, canvas) {
     });
 }
 
-var engine = null;
+window.engine = null;
 var scene = null;
 var sceneToRender = null;
 //window.createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
@@ -68,7 +68,7 @@ var createScene = function () {
     /*
      * FIRST SCENE
      */
-    var firstScene = new BABYLON.Scene(engine);
+    var firstScene = new BABYLON.Scene(window.engine);
     firstScene.clearColor = new BABYLON.Color3(0.03, 0.03, 0.55);
 
     scene = firstScene;
@@ -76,7 +76,7 @@ var createScene = function () {
     /*
      * GUI SCENE
      */
-    var guiScene = new BABYLON.Scene(engine);
+    var guiScene = new BABYLON.Scene(window.engine);
     // MARK THE GUI SCENE AUTO CLEAR AS FALSE SO IT DOESN'T ERASE
     // THE CURRENTLY RENDERING SCENE
     guiScene.autoClear = false;
@@ -101,9 +101,9 @@ var createScene = function () {
     //runRenderLoop inside a setTimeout is neccesary in the Playground
     //to stop the PG's runRenderLoop.
     setTimeout(function () {
-        engine.stopRenderLoop();
+        window.engine.stopRenderLoop();
 
-        engine.runRenderLoop(function () {
+        window.engine.runRenderLoop(function () {
             currentActiveScene.render();
             guiScene.render();
         });
@@ -129,7 +129,7 @@ function startGame(gameName) {
             gameOverManager: gameOverManager,
             slideGestureDetector: slideGestureDetector,
             BABYLON: BABYLON,
-            engine: engine,
+            engine: window.engine,
             advancedTexture: advancedTexture
         },
         {},
@@ -606,7 +606,7 @@ window.initFunction = async function() {
 
 // Resize
 window.addEventListener("resize", function () {
-    engine.resize();
+    window.engine.resize();
 });
 
 window.createGameEnvironment = function (games, adCallback, useMoreGamesLink = true) {
