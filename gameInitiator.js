@@ -130,7 +130,8 @@ function startGame(gameName) {
             slideGestureDetector: slideGestureDetector,
             BABYLON: BABYLON,
             engine: window.engine,
-            advancedTexture: advancedTexture
+            advancedTexture: advancedTexture,
+            canvas: canvas
         },
         {},
         () => {
