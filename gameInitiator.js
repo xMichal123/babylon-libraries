@@ -597,9 +597,9 @@ window.initFunction = async function() {
 
     window.engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false});//await asyncEngineCreation();
 
-    if (!engine) throw 'engine should not be null.';
+    if (!window.engine) throw 'engine should not be null.';
 
-    startRenderLoop(engine, canvas);
+    startRenderLoop(window.engine, canvas);
 
     window.scene = createScene();
 };
