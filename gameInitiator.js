@@ -609,7 +609,7 @@ window.addEventListener("resize", function () {
     engine.resize();
 });
 
-function createGameEnvironment(games, adCallback, useMoreGamesLink = true) {
+window.createGameEnvironment = function (games, adCallback, useMoreGamesLink = true) {
     window.games = games;
     window.useMoreGamesLink = useMoreGamesLink;
     gameOverManager.adCallback = adCallback;
