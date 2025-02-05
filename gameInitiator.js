@@ -61,7 +61,7 @@ var startRenderLoop = function (engine, canvas) {
 var engine = null;
 var scene = null;
 var sceneToRender = null;
-var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+//window.createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
 
 var createScene = function () {
 
@@ -586,16 +586,16 @@ function buildExitButton(position) {
 }
 
 window.initFunction = async function() {
-    var asyncEngineCreation = async function() {
+    /*var asyncEngineCreation = async function() {
         try {
         return createDefaultEngine();
         } catch(e) {
         console.log("the available createEngine function failed. Creating the default engine instead");
         return createDefaultEngine();
         }
-    }
+    }*/
 
-    window.engine = await asyncEngineCreation();
+    window.engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false});//await asyncEngineCreation();
 
     if (!engine) throw 'engine should not be null.';
 
