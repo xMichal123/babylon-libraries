@@ -21,18 +21,18 @@ class SlideGestureDetector {
     // Attach event listeners
     attachEvents() {
         if (!this.attached) {
-            canvas.addEventListener("pointerdown", this.handlePointerDown);
-            canvas.addEventListener("pointerup", this.handlePointerUp);
-            canvas.addEventListener("pointermove", this.handlePointerMove);
+            window.canvas.addEventListener("pointerdown", this.handlePointerDown);
+            window.canvas.addEventListener("pointerup", this.handlePointerUp);
+            window.canvas.addEventListener("pointermove", this.handlePointerMove);
             this.attached = true;
         }
     }
 
     // Detach event listeners
     detachEvents() {
-        canvas.removeEventListener("pointerdown", this.handlePointerDown);
-        canvas.removeEventListener("pointerup", this.handlePointerUp);
-        canvas.removeEventListener("pointermove", this.handlePointerMove);
+        window.canvas.removeEventListener("pointerdown", this.handlePointerDown);
+        window.canvas.removeEventListener("pointerup", this.handlePointerUp);
+        window.canvas.removeEventListener("pointermove", this.handlePointerMove);
     }
 
     handlePointerMove(event) {
