@@ -3,12 +3,17 @@ class GameOverManager {
         this.initialized = false;
         this.scoreBlocks = [];
         this.currentScene = null;
+        this._adCallback = null;
     }
 
     init(callback = () => { gameManager.restart(); }) {
         this.callback = callback;
     }
     
+    set adCallback(adCallback) {
+        this._adCallback = adCallback;
+    }
+
     initialize(model) {
         // Add a background rectangle
         this.background = new BABYLON.GUI.Rectangle();
@@ -137,6 +142,10 @@ class GameOverManager {
 
         for (let i = 0; i < model.length; i++) {
             this.scoreBlocks[i].text = "" + model[i].value;
+        }
+
+        if (this._adCallback) {
+            this._adCallback();
         }
     }
 
