@@ -48,7 +48,7 @@ window.moreGamesCallback = null;
 window.gameScene = null;
 let currentActiveScene = null;
 
-var canvas = document.getElementById("renderCanvas");
+window.canvas = document.getElementById("renderCanvas");
 
 var startRenderLoop = function (engine, canvas) {
     engine.runRenderLoop(function () {
@@ -131,7 +131,7 @@ function startGame(gameName) {
             BABYLON: BABYLON,
             engine: window.engine,
             advancedTexture: advancedTexture,
-            canvas: canvas
+            canvas: window.canvas
         },
         {},
         () => {
