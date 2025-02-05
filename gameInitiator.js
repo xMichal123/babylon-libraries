@@ -2,7 +2,7 @@
 loadScriptSync("https://cdn.jsdelivr.net/gh/xMichal123/babylon-libraries@latest/gameControlsManager.js");
 loadScriptSync("https://cdn.jsdelivr.net/gh/xMichal123/babylon-libraries@latest/scoreManager.js");
 loadScriptSync("https://cdn.jsdelivr.net/gh/xMichal123/babylon-libraries@d1b31c7/gameOverManager.js");
-loadScriptSync("https://cdn.jsdelivr.net/gh/xMichal123/babylon-libraries@latest/slideGestureDetector.js");
+loadScriptSync("https://cdn.jsdelivr.net/gh/xMichal123/babylon-libraries@c413ac6/slideGestureDetector.js");
 
 function removeIframe(iframe) {
     if (iframe && iframe.parentNode) {
