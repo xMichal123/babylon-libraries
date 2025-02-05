@@ -24,7 +24,7 @@ function loadScriptInIframe(url, dependencies = {}, params = {}, callback = null
     }
 
     iframeWindow.params = params;
-    moreGamesCallback = callback; // Pass the iframe explicitly
+    window.moreGamesCallback = callback; // Pass the iframe explicitly
 
     // Step 3: Load and execute the script inside the iframe
     const xhr = new XMLHttpRequest();
@@ -44,7 +44,7 @@ function loadScriptInIframe(url, dependencies = {}, params = {}, callback = null
     return iframe;
 }
 
-let moreGamesCallback = null;
+window.moreGamesCallback = null;
 window.gameScene = null;
 let currentActiveScene = null;
 
